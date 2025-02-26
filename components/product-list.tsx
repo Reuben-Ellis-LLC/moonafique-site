@@ -7,7 +7,7 @@ import {
 } from '@/components/product-list-thumbnail';
 import { ProductListResponse, ProductWithPrice } from '@/lib/schema';
 import { useState, useEffect, useMemo } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export function ProductList({
   initialList,
@@ -19,7 +19,6 @@ export function ProductList({
   );
   const [hasMore, setHasMore] = useState(initialList?.has_more || false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
 
@@ -29,7 +28,6 @@ export function ProductList({
     console.log(lowerQuery);
     console.log(allProducts);
     return allProducts.filter((product) => {
-      console.log('product', product);
       return (
         product.name.toLowerCase().includes(lowerQuery) ||
         (product.description &&
@@ -37,8 +35,6 @@ export function ProductList({
       );
     });
   }, [allProducts, searchQuery]);
-
-  console.log(allProducts);
 
   useEffect(() => {
     if (initialList) {

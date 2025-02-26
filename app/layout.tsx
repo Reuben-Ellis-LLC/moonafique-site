@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { SiteHeader } from '@/components/site-header';
+import { SiteHeader } from '@/components/siteHeader';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Inter } from 'next/font/google';
 import { CartProvider } from '@/lib/cart-context';
