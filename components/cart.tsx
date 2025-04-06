@@ -7,108 +7,114 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-// import {
-//   Tooltip,
-//   TooltipContent,
-//   TooltipTrigger,
-// } from '@/components/ui/tooltip';
-// import { useCartContext } from '@/lib/cart-context';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { useCartContext } from '@/lib/cart-context';
 import Image from 'next/image';
 import { formatCurrency } from '@/lib/utils';
 
 export function Cart() {
-  // const { items, removeItem, updateQuantity, total } = useCartContext();
+  const { items, removeItem, updateQuantity, total } = useCartContext();
 
   return (
     <Sheet>
-      {/* <Tooltip> */}
-      <SheetTrigger asChild>
-        {/* <TooltipTrigger asChild> */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="border-border size-8 shrink-0 border"
-        >
-          <CartIcon className="size-4" />
-          <span className="sr-only">Cart</span>
-          {/* {items.length > 0 && (
-            <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-              {items.reduce((sum, item) => sum + item.quantity, 0)}
-            </span>
-          )} */}
-        </Button>
-        {/* </TooltipTrigger> */}
-      </SheetTrigger>
-      {/* <TooltipContent align="end">Cart</TooltipContent> */}
-      <SheetContent
-        side="right"
-        className="flex w-full flex-col justify-between p-4 pt-12 md:w-[400px]"
-      >
-        <SheetTitle className="absolute left-4 top-3 text-xl ">Cart</SheetTitle>
-        <div className="flex flex-col gap-3 overflow-y-auto">
-          {/* {items.length > 0 ? (
-            items.map((item) => (
-              <div key={item.id} className="flex items-center gap-4">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={64}
-                  height={64}
-                  className="rounded-md object-cover"
-                />
-                <div className="flex-1">
-                  <h3 className="font-medium">{item.name}</h3>
-                  <p className="text-sm text-gray-500">
-                    {formatCurrency(item.price)}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="h-6 w-6"
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    >
-                      -
-                    </Button>
-                    <span>{item.quantity}</span>
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="h-6 w-6"
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  onClick={() => removeItem(item.id)}
-                >
-                  &times;
-                </Button>
-              </div>
-            ))
-          ) : (
-            <p className="text-muted-foreground text-sm">
-              No items in your cart.
-            </p>
-          )} */}
-        </div>
-        {/* {items.length > 0 && (
-          <div className="mt-4 flex flex-col gap-3">
-            <div className="flex justify-between">
-              <span className="font-medium">Total:</span>
-              <span>{formatCurrency(total)}</span>
-            </div>
-            <Button variant="default" size="sm">
-              Proceed to Checkout
+      <Tooltip>
+        <SheetTrigger asChild>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="border-border size-8 shrink-0 border"
+            >
+              <CartIcon className="size-4" />
+              <span className="sr-only">Cart</span>
+              {items.length > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                  {items.reduce((sum, item) => sum + item.quantity, 0)}
+                </span>
+              )}
             </Button>
+          </TooltipTrigger>
+        </SheetTrigger>
+        <TooltipContent align="end">Cart</TooltipContent>
+        <SheetContent
+          side="right"
+          className="flex w-full flex-col justify-between p-4 pt-12 md:w-[400px]"
+        >
+          <SheetTitle className="absolute left-4 top-3 text-xl ">
+            Cart
+          </SheetTitle>
+          <div className="flex flex-col gap-3 overflow-y-auto">
+            {items.length > 0 ? (
+              items.map((item) => (
+                <div key={item.id} className="flex items-center gap-4">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={64}
+                    height={64}
+                    className="rounded-md object-cover"
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-medium">{item.name}</h3>
+                    <p className="text-sm text-gray-500">
+                      {formatCurrency(item.price)}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-6 w-6"
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                      >
+                        -
+                      </Button>
+                      <span>{item.quantity}</span>
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-6 w-6"
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </div>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    &times;
+                  </Button>
+                </div>
+              ))
+            ) : (
+              <p className="text-muted-foreground text-sm">
+                No items in your cart.
+              </p>
+            )}
           </div>
-        )} */}
-      </SheetContent>
-      {/* </Tooltip> */}
+          {items.length > 0 && (
+            <div className="mt-4 flex flex-col gap-3">
+              <div className="flex justify-between">
+                <span className="font-medium">Total:</span>
+                <span>{formatCurrency(total)}</span>
+              </div>
+              <Button variant="default" size="sm">
+                Proceed to Checkout
+              </Button>
+            </div>
+          )}
+        </SheetContent>
+      </Tooltip>
     </Sheet>
   );
 }

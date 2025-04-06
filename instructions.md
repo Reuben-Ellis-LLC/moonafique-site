@@ -1,0 +1,31 @@
+checklist:
+
+- [ ] Finish search functionality to work correctly with pagination
+- [ ] Fix links on footer categories to work for filtering
+- [ ] Change the placeholder Call to Action to something unique for Moonafique
+- [ ] Add authentication with WorkOS using nextjs-authkit
+- [ ] Add UI to signin/signout depending on if the user is authenticated
+- [ ] Truncate long titles in product card name
+- [ ] Add a "view all" link to the product card name
+- [ ] Remove product from the product list if stock is 0 or add a made to order
+- [ ] Add a "made to order" badge to the product card
+- [ ] Add a "sold out" badge to the product card
+- [ ] Add a "coming soon" badge to the product card
+- [ ] Add a "limited edition" badge to the product card
+- [ ] Add a "new" badge to the product card
+- [ ] Add a "featured" badge to the product card
+- [ ] Add a "on sale" badge to the product card
+- [ ] Add a section for testimonials
+- [ ] Add a section for frequently asked questions
+- [ ] Add code to get the app ready for production on Vercel
+- [ ] Add a "contact us" page
+- [ ] Add a "about us" page
+- [ ] Add a "privacy policy" page
+- [ ] Add a "terms of service" page
+- [ ] Add a "cookie policy" page
+- [ ] Add a "refund policy" page
+- [ ] Add a "shipping policy" page
+- [ ] Add a "returns policy" page
+- [ ] Add a "exchange policy" page
+- [ ] Add a "warranty policy" page
+- [ ] Add a "quality policy" page

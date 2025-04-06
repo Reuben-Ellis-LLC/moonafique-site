@@ -1,21 +1,35 @@
 'use client';
 import { useId } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useAuth } from '@workos-inc/authkit-nextjs/components';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-// import {
-//   Tooltip,
-//   TooltipContent,
-//   TooltipTrigger,
-// } from '@/components/ui/tooltip';
+import {
+  Sheet,
+  SheetTitle,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
+  Tooltip,
+  TooltipPortal,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { Menu, Search } from 'lucide-react';
 import Link from 'next/link';
 import { Cart } from '@/components/cart';
 import { Logo } from '@/components/logo';
 
-export function SiteHeader() {
+export function SiteHeader({
+  signInUrl,
+  signOut,
+}: {
+  signInUrl: string;
+  signOut: () => Promise<void>;
+}) {
+  const { user, loading } = useAuth();
   return (
     <header className="bg-background sticky top-0 z-20 w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -37,6 +51,18 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <SearchBar className="hidden sm:block" />
           <Cart />
+          {user ? (
+            <>
+              <Button variant="ghost" onClick={() => signOut()}>
+                Sign Out
+              </Button>
+              <div>Welcome, {user?.firstName}</div>
+            </>
+          ) : (
+            <Button variant="ghost">
+              <Link href={signInUrl}>Sign In</Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>
@@ -68,7 +94,7 @@ function SearchBar({ className }: { className?: string }) {
 function Sidebar() {
   return (
     <Sheet>
-      {/* <Tooltip>
+      <Tooltip>
         <SheetTrigger asChild>
           <TooltipTrigger asChild>
             <Button
@@ -81,26 +107,29 @@ function Sidebar() {
             </Button>
           </TooltipTrigger>
         </SheetTrigger>
-        <TooltipContent align="start">Menu</TooltipContent> */}
-      <SheetContent
-        side="left"
-        className="flex w-full flex-col p-4 pt-12 md:w-3/4"
-      >
-        <SearchBar className="w-full sm:hidden" />
-        <Button className="justify-start" variant="ghost">
-          <Link href={`/?search=dragon`}>Dragons</Link>
-        </Button>
-        <Button className="justify-start" variant="ghost">
-          <Link href={`/?search=creature`}>Creatures</Link>
-        </Button>
-        <Button className="justify-start" variant="ghost">
-          <Link href={`/?search=fossil`}>Fossil</Link>
-        </Button>
-        <Button className="justify-start" variant="ghost">
-          <Link href={`/?search=misc`}>Misc</Link>
-        </Button>
-      </SheetContent>
-      {/* </Tooltip> */}
+        <TooltipPortal>
+          <TooltipContent align="start">Menu</TooltipContent>
+        </TooltipPortal>
+        <SheetTitle className="absolute left-4 top-3 text-xl"></SheetTitle>
+        <SheetContent
+          side="left"
+          className="flex w-full flex-col p-4 pt-12 md:w-3/4"
+        >
+          <SearchBar className="w-full sm:hidden" />
+          <Button className="justify-start" variant="ghost">
+            <Link href={`/?search=dragon`}>Dragons</Link>
+          </Button>
+          <Button className="justify-start" variant="ghost">
+            <Link href={`/?search=creature`}>Creatures</Link>
+          </Button>
+          <Button className="justify-start" variant="ghost">
+            <Link href={`/?search=fossil`}>Fossil</Link>
+          </Button>
+          <Button className="justify-start" variant="ghost">
+            <Link href={`/?search=misc`}>Misc</Link>
+          </Button>
+        </SheetContent>
+      </Tooltip>
     </Sheet>
   );
 }
