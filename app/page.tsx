@@ -1,5 +1,7 @@
 import { Footer } from '@/components/Footer';
 import { ProductList } from '@/components/product-list';
+import { Testimonials } from '@/components/testimonials';
+import { FAQ } from '@/components/faq';
 import { getProducts } from '@/lib/products';
 
 export default async function Page() {
@@ -11,6 +13,8 @@ export default async function Page() {
         Our Products
       </h1>
       <ProductList initialList={products} />
+      <Testimonials />
+      <FAQ />
       <Footer />
     </div>
   );

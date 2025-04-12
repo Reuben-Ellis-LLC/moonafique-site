@@ -1,7 +1,6 @@
 'use client';
 import { useId } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useAuth } from '@workos-inc/authkit-nextjs/components';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -21,15 +20,18 @@ import { Menu, Search } from 'lucide-react';
 import Link from 'next/link';
 import { Cart } from '@/components/cart';
 import { Logo } from '@/components/logo';
+import { User } from '@workos-inc/node';
+import { SignInButton } from '@/components/signInButton';
+import { UserMenu } from '@/components/userMenu';
 
 export function SiteHeader({
   signInUrl,
-  signOut,
+  user,
 }: {
   signInUrl: string;
-  signOut: () => Promise<void>;
+  user: User | null;
 }) {
-  const { user, loading } = useAuth();
+  console.log(user);
   return (
     <header className="bg-background sticky top-0 z-20 w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -47,21 +49,16 @@ export function SiteHeader({
           <Link href={`/?search=creature`}>Creatures</Link>
           <Link href={`/?search=fossil`}>Fossil</Link>
           <Link href={`/?search=misc`}>Misc</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
         <div className="flex items-center gap-2">
           <SearchBar className="hidden sm:block" />
           <Cart />
           {user ? (
-            <>
-              <Button variant="ghost" onClick={() => signOut()}>
-                Sign Out
-              </Button>
-              <div>Welcome, {user?.firstName}</div>
-            </>
+            <UserMenu user={user} />
           ) : (
-            <Button variant="ghost">
-              <Link href={signInUrl}>Sign In</Link>
-            </Button>
+            <SignInButton user={user} signInUrl={signInUrl} variant="soft" />
           )}
         </div>
       </div>
@@ -127,6 +124,12 @@ function Sidebar() {
           </Button>
           <Button className="justify-start" variant="ghost">
             <Link href={`/?search=misc`}>Misc</Link>
+          </Button>
+          <Button className="justify-start" variant="ghost">
+            <Link href="/about">About</Link>
+          </Button>
+          <Button className="justify-start" variant="ghost">
+            <Link href="/contact">Contact</Link>
           </Button>
         </SheetContent>
       </Tooltip>

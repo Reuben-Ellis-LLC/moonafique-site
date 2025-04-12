@@ -14,6 +14,19 @@ export const productSchema = z.object({
     .object({
       category: z.string().optional(),
       stock: z.number().optional(),
+      madeToOrder: z.boolean().optional(),
+      status: z
+        .enum([
+          'available',
+          'madeToOrder',
+          'soldOut',
+          'comingSoon',
+          'limitedEdition',
+          'new',
+          'featured',
+          'onSale',
+        ])
+        .optional(),
     })
     .optional(),
 });

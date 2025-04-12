@@ -1,5 +1,5 @@
 import { AuthKitProvider } from '@workos-inc/authkit-nextjs/components';
-import { getSignInUrl, signOut } from '@workos-inc/authkit-nextjs';
+import { withAuth, getSignInUrl } from '@/app/actions/user';
 import { cn } from '@/lib/utils';
 import { SiteHeader } from '@/components/siteHeader';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -15,13 +15,19 @@ export const metadata = {
     'Welcome to Moonafique! High quality 3D prints. We are a small team of 3D printing enthusiasts who love to create and share our work with the world.',
 };
 
+async function getData() {
+  const user = await withAuth();
+  return { user: user.user };
+}
+
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Get the URL to redirect the user to AuthKit to sign in
+  const { user } = await getData();
   const signInUrl = await getSignInUrl();
+
   return (
     <html lang="en">
       <body
@@ -30,7 +36,7 @@ export default async function Layout({
         <AuthKitProvider>
           <CartProvider>
             <TooltipProvider delayDuration={0}>
-              <SiteHeader signInUrl={signInUrl} signOut={signOut} />
+              <SiteHeader signInUrl={signInUrl} user={user} />
               <main className="flex-1">{children}</main>
             </TooltipProvider>
           </CartProvider>

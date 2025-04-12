@@ -32,6 +32,53 @@ export const Footer = ({}) => {
         </div>
       </div>
       <div className="grid grid-cols-1">
+        <h3 className="text-lg font-semibold mb-4">Legal</h3>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href="/privacy"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Terms of Service
+          </Link>
+          <Link
+            href="/cookies"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Cookie Policy
+          </Link>
+          <Link
+            href="/refund"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Refund Policy
+          </Link>
+          <Link
+            href="/shipping"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Shipping Policy
+          </Link>
+          <Link
+            href="/warranty"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Warranty Policy
+          </Link>
+          <Link
+            href="/quality"
+            className="text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            Quality Policy
+          </Link>
+        </div>
+      </div>
+      <div className="grid grid-cols-1">
         <p>© 2024 - All right reserved by Moonafique LLC</p>
       </div>
       <div className="col-span-1 flex justify-center gap-4">

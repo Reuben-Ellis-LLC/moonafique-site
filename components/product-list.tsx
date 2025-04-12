@@ -7,7 +7,7 @@ import {
 } from '@/components/product-list-thumbnail';
 import { ProductListResponse, ProductWithPrice } from '@/lib/schema';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export function ProductList({
   initialList,
@@ -20,6 +20,7 @@ export function ProductList({
   const [hasMore, setHasMore] = useState(initialList?.has_more || false);
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const searchQuery = searchParams.get('search') || '';
 
   // Effect to handle search parameter changes
@@ -56,6 +57,10 @@ export function ProductList({
     setLoading(false);
   };
 
+  const clearFilters = () => {
+    router.push('/');
+  };
+
   if (!loading && allProducts.length === 0) {
     return <div>No products found.</div>;
   }
@@ -63,9 +68,19 @@ export function ProductList({
   return (
     <div className="relative mb-8 px-4 flex flex-col items-center gap-8">
       {searchQuery && (
-        <h2 className="text-2xl font-bold">
-          Search results for: {searchQuery}
-        </h2>
+        <div className="flex items-center gap-4">
+          <h2 className="text-2xl font-bold">
+            Search results for: {searchQuery}
+          </h2>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={clearFilters}
+            className="text-sm"
+          >
+            View All Products
+          </Button>
+        </div>
       )}
       <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {allProducts.map((product) => (

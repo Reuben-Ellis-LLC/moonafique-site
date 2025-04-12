@@ -15,7 +15,9 @@ const config: StorybookConfig = {
   features: {
     experimentalRSC: true,
   },
-  docs: {},
+  docs: {
+    autodocs: true
+  },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
