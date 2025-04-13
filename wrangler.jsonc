@@ -1,7 +1,0 @@
-{
-  "name": "moonafique-trigger-worker",
-  "compatibility_date": "2025-04-13",
-  "assets": {
-    "directory": "./public"
-  }
-}
