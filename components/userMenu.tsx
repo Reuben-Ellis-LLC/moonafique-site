@@ -20,7 +20,7 @@ export function UserMenu({ user }: { user: User }) {
           <Avatar className="h-8 w-8">
             <AvatarImage
               src={user.profilePictureUrl || ''}
-              alt={user.firstName}
+              alt={user.firstName || ''}
             />
             <AvatarFallback>
               {user.firstName?.[0]}
